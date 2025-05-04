@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clase Práctica 2 - Carrusel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background: #0057b7;
+      color: white;
+      padding: 20px 0;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    p {
+      margin-top: 10px;
+      color: #333;
+    }
+
+    .carousel {
+      margin: 30px auto;
+      position: relative;
+      width: 600px;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 100%;
+      display: none;
+      object-fit: cover;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 24px;
+      z-index: 1;
+    }
+
+    .arrow.left {
+      left: 10px;
+    }
+
+    .arrow.right {
+      right: 10px;
+    }
+
+    .arrow:hover {
+      background-color: rgba(0,0,0,0.7);
+    }
+
+    footer {
+      margin-top: 40px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Práctica 2: Carrusel de Imágenes</h1>
+    <p>Estudiante: Cristian Maldonado Portilla</p>
+    <p>Carrera: Ingenieria en Sistemas Inteligente</p>
+  </header>
+
+  <div class="carousel">
+    <button class="arrow left" onclick="changeImage(-1)">❮</button>
+    <img src="IMAGENES/imagen 0.1.jpg" class="active">
+    <img src="IMAGENES/imagen 0.2.jpg">
+    <img src="IMAGENES/imagen 0.3.jpg"> 
+    <img src="IMAGENES/imagen 0.4.jpg">
+    <img src="IMAGENES/imagen 0.5.jpg">
+    <img src="IMAGENES/imagen 0.6.jpg">
+    
+    <button class="arrow right" onclick="changeImage(1)">❯</button>
+  </div>
+
+  <footer>
+    <p>Desarrollado con HTML, CSS y JavaScript.</p>
+  </footer>
+
+  <script>
+    let currentImage = 0;
+    const images = document.querySelectorAll(".carousel img");
+
+    function changeImage(direction) {
+      images[currentImage].classList.remove("active");
+      currentImage = (currentImage + direction + images.length) % images.length;
+      images[currentImage].classList.add("active");
+    }
+  </script>
+</body>
+</html>

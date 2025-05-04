@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carrusel de Imágenes</title>
+  
+  <!-- Estilos CSS para dar formato al carrusel -->
+  <style>
+    /* Estilo general del cuerpo de la página */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Altura de la ventana completa */
+    }
+
+    /* Contenedor principal del carrusel */
+    .carousel {
+      position: relative; /* Necesario para posicionar los botones sobre las imágenes */
+      width: 600px;
+      height: 400px;
+      overflow: hidden; /* Oculta las imágenes que estén fuera del contenedor */
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3); /* Sombra suave */
+    }
+
+    /* Estilo de las imágenes dentro del carrusel */
+    .carousel img {
+      width: 100%; /* Ocupa todo el ancho del contenedor */
+      height: 100%; /* Ocupa toda la altura */
+      display: none; /* Oculta todas las imágenes inicialmente */
+      object-fit: cover; /* Ajusta la imagen sin deformarla */
+    }
+
+    /* Solo la imagen activa se muestra */
+    .carousel img.active {
+      display: block;
+    }
+
+    /* Estilo general de los botones de flechas */
+    .arrow {
+      position: absolute;
+      top: 50%; /* Centra verticalmente */
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5); /* Fondo semitransparente */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 24px;
+      z-index: 1; /* Se asegura de que esté encima de las imágenes */
+    }
+
+    /* Posición de la flecha izquierda */
+    .arrow.left {
+      left: 10px;
+    }
+
+    /* Posición de la flecha derecha */
+    .arrow.right {
+      right: 10px;
+    }
+
+    /* Efecto al pasar el mouse sobre los botones */
+    .arrow:hover {
+      background-color: rgba(0,0,0,0.7);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Carrusel de imágenes -->
+  <div class="carousel">
+
+    <!-- Botón de flecha izquierda -->
+    <button class="arrow left" onclick="changeImage(-1)">❮</button>
+
+    <!-- Imágenes del carrusel -->
+    <img src="IMAGENES/imagen 0.1.jpg" class="active">
+    <img src="IMAGENES/imagen 0.2.jpg">
+    <img src="IMAGENES/imagen 0.3.jpg"> 
+    <img src="IMAGENES/imagen 0.4.jpg">
+    <img src="IMAGENES/imagen 0.5.jpg">
+    <img src="IMAGENES/imagen 0.6.jpg">
+
+    <!-- Botón de flecha derecha -->
+    <button class="arrow right" onclick="changeImage(1)">❯</button>
+  </div>
+
+  <!-- Script de JavaScript para manejar el carrusel -->
+  <script>
+    // Variable que indica la imagen actual mostrada
+    let currentImage = 0;
+
+    // Selecciona todas las imágenes dentro del carrusel
+    const images = document.querySelectorAll(".carousel img");
+
+    /**
+     * Función para cambiar de imagen
+     * @param {number} direction -1 para retroceder, 1 para avanzar
+     */
+    function changeImage(direction) {
+      // Oculta la imagen actual
+      images[currentImage].classList.remove("active");
+
+      // Calcula el nuevo índice de la imagen actual
+      currentImage = (currentImage + direction + images.length) % images.length;
+
+      // Muestra la nueva imagen
+      images[currentImage].classList.add("active");
+    }
+  </script>
+</body>
+</html>
